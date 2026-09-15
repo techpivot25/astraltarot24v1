@@ -90,8 +90,8 @@
   &:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--color-primary) 65%, transparent); background: color-mix(in oklab, var(--color-card) 84%, white 16%); box-shadow: 0 20px 44px oklch(0 0 0 / 30%), 0 0 28px var(--gold-glow); }
 }
 @utility section-space { padding-block: clamp(4.5rem, 9vw, 8rem); }
-@utility ornament { text-align: center; color: var(--color-primary); font-size: .75rem; letter-spacing: .4em; }
-@utility nav-link { font-family: var(--font-display); font-size: .7rem; text-transform: uppercase; letter-spacing: .11em; color: var(--color-muted-foreground); transition: color .2s; &:hover { color: var(--color-primary); } }
+@utility ornament { text-align: center; color: var(--color-primary); font-size: .9rem; letter-spacing: .4em; }
+@utility nav-link { font-family: var(--font-display); font-size: .84rem; text-transform: uppercase; letter-spacing: .11em; color: var(--color-muted-foreground); transition: color .2s; &:hover { color: var(--color-primary); } }
 @utility animate-rise { animation: rise .75s ease-out both; }
 
 .site-shell { min-height: 100vh; overflow: hidden; background-image: radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--color-accent) 30%, transparent), transparent 32%), radial-gradient(circle at 15% 32%, color-mix(in oklab, var(--color-violet) 70%, transparent), transparent 23%), radial-gradient(circle, oklch(0.9 0.05 90 / 68%) 0 1px, transparent 1.4px); background-size: auto, auto, 92px 92px; }
