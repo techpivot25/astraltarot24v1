@@ -95,5 +95,5 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return <label className="grid gap-2"><span className="eyebrow text-[0.6rem]">{label}</span>{children}</label>;
+  return <label className="grid gap-2"><span className="eyebrow text-[0.72rem]">{label}</span>{children}</label>;
 }

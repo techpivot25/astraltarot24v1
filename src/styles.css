@@ -31,6 +31,10 @@
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
+  --text-xs: 0.9rem;
+  --text-xs--line-height: 1.35rem;
+  --text-sm: 1.05rem;
+  --text-sm--line-height: 1.55rem;
 }
 
 :root {
@@ -46,7 +50,7 @@
   --secondary: oklch(0.19 0.075 292);
   --secondary-foreground: oklch(0.93 0.025 86);
   --muted: oklch(0.16 0.04 292);
-  --muted-foreground: oklch(0.7 0.035 292);
+  --muted-foreground: oklch(0.97 0.005 86);
   --accent: oklch(0.22 0.09 295);
   --accent-foreground: oklch(0.95 0.02 86);
   --destructive: oklch(0.58 0.22 28);
@@ -75,7 +79,7 @@
 
 @utility hero-title { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.04; text-transform: uppercase; color: var(--color-primary); text-shadow: 0 0 26px var(--gold-glow); }
 @utility section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.08; text-transform: uppercase; }
-@utility eyebrow { font-family: var(--font-display); font-size: .68rem; text-transform: uppercase; letter-spacing: .16em; color: var(--color-primary); }
+@utility eyebrow { font-family: var(--font-display); font-size: .82rem; text-transform: uppercase; letter-spacing: .16em; color: var(--color-primary); }
 @utility panel { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: color-mix(in oklab, var(--color-card) 88%, transparent); box-shadow: 0 16px 50px oklch(0 0 0 / 24%); }
 @utility panel-bright {
   border: 1px solid color-mix(in oklab, var(--color-primary) 30%, var(--color-border));
@@ -86,8 +90,8 @@
   &:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--color-primary) 65%, transparent); background: color-mix(in oklab, var(--color-card) 84%, white 16%); box-shadow: 0 20px 44px oklch(0 0 0 / 30%), 0 0 28px var(--gold-glow); }
 }
 @utility section-space { padding-block: clamp(4.5rem, 9vw, 8rem); }
-@utility ornament { text-align: center; color: var(--color-primary); font-size: .75rem; letter-spacing: .4em; }
-@utility nav-link { font-family: var(--font-display); font-size: .7rem; text-transform: uppercase; letter-spacing: .11em; color: var(--color-muted-foreground); transition: color .2s; &:hover { color: var(--color-primary); } }
+@utility ornament { text-align: center; color: var(--color-primary); font-size: .9rem; letter-spacing: .4em; }
+@utility nav-link { font-family: var(--font-display); font-size: .84rem; text-transform: uppercase; letter-spacing: .11em; color: var(--color-muted-foreground); transition: color .2s; &:hover { color: var(--color-primary); } }
 @utility animate-rise { animation: rise .75s ease-out both; }
 
 .site-shell { min-height: 100vh; overflow: hidden; background-image: radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--color-accent) 30%, transparent), transparent 32%), radial-gradient(circle at 15% 32%, color-mix(in oklab, var(--color-violet) 70%, transparent), transparent 23%), radial-gradient(circle, oklch(0.9 0.05 90 / 68%) 0 1px, transparent 1.4px); background-size: auto, auto, 92px 92px; }
