@@ -14,16 +14,123 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blog_post_views: {
+        Row: {
+          country: string | null
+          device: string | null
+          id: string
+          post_id: string
+          viewed_at: string
+        }
+        Insert: {
+          country?: string | null
+          device?: string | null
+          id?: string
+          post_id: string
+          viewed_at?: string
+        }
+        Update: {
+          country?: string | null
+          device?: string | null
+          id?: string
+          post_id?: string
+          viewed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_views_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_posts: {
+        Row: {
+          author_id: string | null
+          category: string | null
+          content: string
+          created_at: string
+          featured_image: string | null
+          heading: string
+          id: string
+          publish_date: string
+          slug: string
+          status: Database["public"]["Enums"]["post_status"]
+          sub_heading: string | null
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string | null
+          content?: string
+          created_at?: string
+          featured_image?: string | null
+          heading: string
+          id?: string
+          publish_date?: string
+          slug: string
+          status?: Database["public"]["Enums"]["post_status"]
+          sub_heading?: string | null
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          category?: string | null
+          content?: string
+          created_at?: string
+          featured_image?: string | null
+          heading?: string
+          id?: string
+          publish_date?: string
+          slug?: string
+          status?: Database["public"]["Enums"]["post_status"]
+          sub_heading?: string | null
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      post_status: "draft" | "scheduled" | "published"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +257,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      post_status: ["draft", "scheduled", "published"],
+    },
   },
 } as const
