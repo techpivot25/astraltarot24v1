@@ -1,0 +1,109 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cinzel", Georgia, serif;
+  --font-body: "Cormorant Garamond", Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-deep: var(--deep);
+  --color-violet: var(--violet);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --text-xs: 0.9rem;
+  --text-xs--line-height: 1.35rem;
+  --text-sm: 1.05rem;
+  --text-sm--line-height: 1.55rem;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.075 0.025 292);
+  --foreground: oklch(0.93 0.025 86);
+  --card: oklch(0.125 0.055 293);
+  --card-foreground: oklch(0.93 0.025 86);
+  --popover: oklch(0.115 0.05 293);
+  --popover-foreground: oklch(0.93 0.025 86);
+  --primary: oklch(0.74 0.145 86);
+  --primary-foreground: oklch(0.13 0.04 293);
+  --secondary: oklch(0.19 0.075 292);
+  --secondary-foreground: oklch(0.93 0.025 86);
+  --muted: oklch(0.16 0.04 292);
+  --muted-foreground: oklch(0.97 0.005 86);
+  --accent: oklch(0.22 0.09 295);
+  --accent-foreground: oklch(0.95 0.02 86);
+  --destructive: oklch(0.58 0.22 28);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.3 0.095 295 / 55%);
+  --input: oklch(0.18 0.05 292);
+  --ring: oklch(0.74 0.145 86);
+  --deep: oklch(0.055 0.018 292);
+  --violet: oklch(0.16 0.065 293);
+  --gold-glow: oklch(0.75 0.16 86 / 35%);
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes twinkle { 0%,100% { opacity:.35 } 50% { opacity:1 } }
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-body); font-size: 17px; letter-spacing: 0; }
+  button, input, select, textarea { font: inherit; }
+  input, select, textarea { width: 100%; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-input); color: var(--color-foreground); padding: .7rem .8rem; outline: none; transition: border-color .2s, box-shadow .2s; }
+  input:focus, select:focus, textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 2px var(--gold-glow); }
+  input::placeholder, textarea::placeholder { color: var(--color-muted-foreground); }
+}
+
+@utility hero-title { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.04; text-transform: uppercase; color: var(--color-primary); text-shadow: 0 0 26px var(--gold-glow); }
+@utility section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.08; text-transform: uppercase; }
+@utility eyebrow { font-family: var(--font-display); font-size: .82rem; text-transform: uppercase; letter-spacing: .16em; color: var(--color-primary); }
+@utility panel { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: color-mix(in oklab, var(--color-card) 88%, transparent); box-shadow: 0 16px 50px oklch(0 0 0 / 24%); }
+@utility panel-bright {
+  border: 1px solid color-mix(in oklab, var(--color-primary) 30%, var(--color-border));
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklab, var(--color-card) 90%, white 10%);
+  box-shadow: 0 16px 50px oklch(0 0 0 / 24%);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease;
+  &:hover { transform: translateY(-4px); border-color: color-mix(in oklab, var(--color-primary) 65%, transparent); background: color-mix(in oklab, var(--color-card) 84%, white 16%); box-shadow: 0 20px 44px oklch(0 0 0 / 30%), 0 0 28px var(--gold-glow); }
+}
+@utility section-space { padding-block: clamp(4.5rem, 9vw, 8rem); }
+@utility ornament { text-align: center; color: var(--color-primary); font-size: .9rem; letter-spacing: .4em; }
+@utility nav-link { font-family: var(--font-display); font-size: .84rem; text-transform: uppercase; letter-spacing: .11em; color: var(--color-muted-foreground); transition: color .2s; &:hover { color: var(--color-primary); } }
+@utility animate-rise { animation: rise .75s ease-out both; }
+
+.site-shell { min-height: 100vh; overflow: hidden; background-image: radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--color-accent) 30%, transparent), transparent 32%), radial-gradient(circle at 15% 32%, color-mix(in oklab, var(--color-violet) 70%, transparent), transparent 23%), radial-gradient(circle, oklch(0.9 0.05 90 / 68%) 0 1px, transparent 1.4px); background-size: auto, auto, 92px 92px; }
+.site-shell::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.2; background-image:radial-gradient(circle, var(--color-primary) 0 1px, transparent 1.5px); background-size:171px 151px; animation:twinkle 5s ease-in-out infinite; }
+.page-intro { padding: 10rem 0 6rem; border-bottom: 1px solid var(--color-border); background: radial-gradient(ellipse at center, color-mix(in oklab, var(--color-accent) 32%, transparent), transparent 67%); }
+.celestial-ring { position:absolute; inset:50% auto auto 50%; width:25rem; aspect-ratio:1; border:1px solid color-mix(in oklab,var(--color-primary) 18%, transparent); border-radius:50%; transform:translate(-50%,-50%); }
+.celestial-ring::before,.celestial-ring::after { content:"";position:absolute;inset:13%;border:inherit;border-radius:inherit; }
+.celestial-ring::after { inset:30%; animation:orbit 20s linear infinite; border-top-color:var(--color-primary); }
+.tarot-fan { display:flex; justify-content:center; align-items:flex-end; min-height:280px; perspective:900px; }
+.tarot-card { width:150px; aspect-ratio:.62; object-fit:cover; border:2px solid color-mix(in oklab,var(--color-primary) 55%, transparent); border-radius:7px; box-shadow:0 20px 40px oklch(0 0 0 / 40%); margin-inline:-28px; transition:transform .35s; }
+.tarot-card:nth-child(1){transform:rotate(-14deg) translateY(28px)}.tarot-card:nth-child(2){transform:rotate(-7deg) translateY(8px)}.tarot-card:nth-child(4){transform:rotate(7deg) translateY(8px)}.tarot-card:nth-child(5){transform:rotate(14deg) translateY(28px)}
+.tarot-card:hover { transform:translateY(-18px) rotate(0); z-index:5; }
+details summary { list-style:none; cursor:pointer; } details summary::-webkit-details-marker { display:none; }
+@media (max-width:640px){.tarot-card{width:96px;margin-inline:-24px}.page-intro{padding-top:8rem}.section-space{padding-inline:1.25rem}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
