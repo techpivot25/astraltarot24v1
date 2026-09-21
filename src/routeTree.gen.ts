@@ -15,6 +15,8 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAdminAnalyticsRouteImport } from './routes/_authenticated/admin.analytics'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin.dashboard'
 import { Route as AuthenticatedAdminBlogIdRouteImport } from './routes/_authenticated/admin.blog.$id'
@@ -49,6 +51,16 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminAnalyticsRoute =
   AuthenticatedAdminAnalyticsRouteImport.update({
     id: '/admin/analytics',
@@ -80,6 +92,8 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/admin/login': typeof AdminLoginRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -91,6 +105,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/admin/login': typeof AdminLoginRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -104,6 +120,8 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/admin/login': typeof AdminLoginRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/_authenticated/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
   '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/_authenticated/admin/blog/$id': typeof AuthenticatedAdminBlogIdRoute
@@ -117,6 +135,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/admin/login'
+    | '/blog/$slug'
+    | '/blog/'
     | '/admin/analytics'
     | '/admin/dashboard'
     | '/admin/blog/$id'
@@ -128,6 +148,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/admin/login'
+    | '/blog/$slug'
+    | '/blog'
     | '/admin/analytics'
     | '/admin/dashboard'
     | '/admin/blog/$id'
@@ -140,6 +162,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/admin/login'
+    | '/blog/$slug'
+    | '/blog/'
     | '/_authenticated/admin/analytics'
     | '/_authenticated/admin/dashboard'
     | '/_authenticated/admin/blog/$id'
@@ -153,6 +177,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -197,6 +223,20 @@ declare module '@tanstack/react-router' {
       path: '/admin/login'
       fullPath: '/admin/login'
       preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/analytics': {
@@ -254,6 +294,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
   AdminLoginRoute: AdminLoginRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
