@@ -1,15 +1,15 @@
 # Roadmap
 
-## Admin panel (in progress)
-- [x] Backend: blog_posts, blog_post_views, user_roles, storage bucket, admin account
-- [ ] Login page, dashboard, blog editor, analytics
-- [ ] Public blog listing + /blog/$slug reading from database
+## Admin panel — done
+- [x] Login (astratarot24@gmail.com), dashboard, editor with formatting + image upload, scheduling, analytics
+- [x] Public blog listing + /blog/$slug articles reading from the database, view tracking
+- [x] Enquiries inbox in the admin
 
-## Contact page requests
-- [ ] Cal.com booking in the "Preferred date & time" field
-- [ ] Enquiry form sends lead + appointment details to astraltarot24@gmail.com
-- [ ] Replace phone 99998 36364 with 8586970405 everywhere
-- [ ] Replace support@astraltarot24.in with appointment@astraltarot24.in everywhere
+## Contact page
+- [x] Booking calendar link in the "Preferred date & time" area (cal.com handle to confirm)
+- [x] Enquiries saved and visible in the admin inbox
+- [x] Phone 8586970405 and appointment@astraltarot24.in everywhere
+- [ ] Email delivery of leads to astraltarot24@gmail.com — needs sender domain setup
 
 ## SEO follow-ups
-- [ ] Sitemap page, Privacy + Terms pages, remove placeholder testimonials
+- [ ] Privacy + Terms pages, remove placeholder testimonials, sitemap page
