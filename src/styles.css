@@ -109,25 +109,29 @@ details summary { list-style:none; cursor:pointer; } details summary::-webkit-de
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 /* ---------- Admin panel (light surface) ---------- */
 .admin-shell {
-  --color-background: oklch(0.985 0 0);
-  --color-foreground: oklch(0.21 0.01 264);
-  --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.21 0.01 264);
-  --color-muted: oklch(0.96 0.003 264);
-  --color-muted-foreground: oklch(0.52 0.014 264);
-  --color-border: oklch(0.9 0.005 264);
-  --color-input: oklch(0.9 0.005 264);
-  --color-primary: oklch(0.55 0.19 265);
-  --color-primary-foreground: oklch(1 0 0);
-  --color-secondary: oklch(0.96 0.003 264);
-  --color-secondary-foreground: oklch(0.21 0.01 264);
-  --color-accent: oklch(0.96 0.003 264);
-  --color-accent-foreground: oklch(0.21 0.01 264);
-  --color-ring: oklch(0.55 0.19 265);
-  --color-destructive: oklch(0.58 0.22 27);
-  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.21 0.01 264);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.01 264);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.01 264);
+  --muted: oklch(0.96 0.003 264);
+  --muted-foreground: oklch(0.5 0.014 264);
+  --border: oklch(0.9 0.005 264);
+  --input: oklch(1 0 0);
+  --primary: oklch(0.55 0.19 265);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.003 264);
+  --secondary-foreground: oklch(0.21 0.01 264);
+  --accent: oklch(0.96 0.003 264);
+  --accent-foreground: oklch(0.21 0.01 264);
+  --ring: oklch(0.55 0.19 265);
+  --gold-glow: oklch(0.55 0.19 265 / 18%);
+  font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  color: var(--foreground);
 }
-.admin-shell h1, .admin-shell h2, .admin-shell h3 { text-transform: none; letter-spacing: 0; }
+.admin-shell h1, .admin-shell h2, .admin-shell h3 { text-transform: none; letter-spacing: 0; font-family: inherit; }
+.admin-shell input, .admin-shell select, .admin-shell textarea { background: var(--input); color: var(--foreground); border-color: var(--border); }
 .admin-prose { line-height: 1.75; }
 .admin-prose h1 { font-size: 1.75rem; font-weight: 600; margin: 1rem 0 .5rem; }
 .admin-prose h2 { font-size: 1.4rem; font-weight: 600; margin: 1rem 0 .5rem; }
@@ -135,5 +139,5 @@ details summary { list-style:none; cursor:pointer; } details summary::-webkit-de
 .admin-prose p { margin: .6rem 0; }
 .admin-prose ul { list-style: disc; padding-left: 1.4rem; }
 .admin-prose ol { list-style: decimal; padding-left: 1.4rem; }
-.admin-prose a { color: var(--color-primary); text-decoration: underline; }
+.admin-prose a { color: var(--primary); text-decoration: underline; }
 .admin-prose img { max-width: 100%; border-radius: 8px; margin: .75rem 0; }
