@@ -53,6 +53,11 @@ export function SiteHeader() {
   );
 }
 
+export const CONTACT_PHONE = "+91 85869 70405";
+export const CONTACT_PHONE_DIGITS = "918586970405";
+export const CONTACT_EMAIL = "appointment@astraltarot24.in";
+export const CAL_LINK = "astraltarot24/tarot-reading";
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-deep py-12">
@@ -61,7 +66,7 @@ export function SiteFooter() {
         <div><Brand /><p className="mt-5 text-sm leading-7 text-muted-foreground">Illuminating your path through the ancient wisdom of tarot and the cosmic language of astrology.</p></div>
         <FooterList title="Services" items={["Tarot Card Reading", "Astrology + Tarot", "Online Reading", "Past Life Analysis"]} />
         <FooterList title="Navigate" items={["Home", "About", "Blog", "Contact"]} />
-        <div><p className="eyebrow">Connect</p><p className="mt-4 text-sm leading-7 text-muted-foreground">WhatsApp<br />+91 99998 36364<br /><br />Email<br />support@astraltarot24.in<br /><br />Mon–Fri, 11am–6pm IST</p></div>
+        <div><p className="eyebrow">Connect</p><p className="mt-4 text-sm leading-7 text-muted-foreground">WhatsApp<br />{CONTACT_PHONE}<br /><br />Email<br />{CONTACT_EMAIL}<br /><br />Mon–Fri, 11am–6pm IST</p></div>
       </div>
       <div className="mx-auto mt-12 flex max-w-5xl flex-col justify-between gap-3 border-t border-border px-5 pt-6 text-xs text-muted-foreground sm:flex-row"><span>© 2026 Astral Tarot 24. All rights reserved.</span><span>Privacy Policy &nbsp;&nbsp; Terms of Service</span></div>
     </footer>
@@ -81,15 +86,68 @@ export function PageIntro({ eyebrow, title, copy }: { eyebrow: string; title: st
 }
 
 export function EnquiryForm({ compact = false }: { compact?: boolean }) {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", reading_type: "", preferred_time: "", message: "" });
+  const [busy, setBusy] = useState(false);
+  const [sent, setSent] = useState(false);
+  const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  async function onSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.from("enquiries").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      reading_type: form.reading_type || null,
+      preferred_time: form.preferred_time.trim() || null,
+      message: form.message.trim() || null,
+    });
+    setBusy(false);
+    if (error) {
+      toast.error("Your message could not be sent", { description: "Please try again or reach us on WhatsApp." });
+      return;
+    }
+    setSent(true);
+    setForm({ name: "", email: "", phone: "", reading_type: "", preferred_time: "", message: "" });
+    toast.success("Thank you — your request has been received", { description: "We reply within a few hours during working hours." });
+  }
+
   return (
-    <form className="panel grid gap-4 p-6 md:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
-      <Field label="Your name"><input placeholder="Enter your name" /></Field>
-      <Field label="Email address"><input type="email" placeholder="you@email.com" /></Field>
-      <Field label="WhatsApp / phone"><input placeholder="+91 00000 00000" /></Field>
-      <Field label="Type of reading"><select defaultValue=""><option value="" disabled>Select a reading...</option><option>One-on-one tarot reading</option><option>Astrology + tarot combined</option><option>Online reading</option></select></Field>
-      {!compact && <div className="md:col-span-2"><Field label="Preferred date & time"><input placeholder="e.g. Weekday evening, Saturday morning IST" /></Field></div>}
-      <div className="md:col-span-2"><Field label="Your message"><textarea rows={compact ? 3 : 4} placeholder="Share what's on your heart — what guidance are you seeking?" /></Field></div>
-      <Button variant="celestial" className="md:col-span-2">Send my {compact ? "message" : "enquiry"}</Button>
+    <form className="panel grid gap-4 p-6 md:grid-cols-2" onSubmit={onSubmit}>
+      <Field label="Your name"><input required placeholder="Enter your name" value={form.name} onChange={set("name")} /></Field>
+      <Field label="Email address"><input required type="email" placeholder="you@email.com" value={form.email} onChange={set("email")} /></Field>
+      <Field label="WhatsApp / phone"><input placeholder="+91 00000 00000" value={form.phone} onChange={set("phone")} /></Field>
+      <Field label="Type of reading">
+        <select value={form.reading_type} onChange={set("reading_type")}>
+          <option value="" disabled>Select a reading...</option>
+          <option>One-on-one tarot reading</option>
+          <option>Astrology + tarot combined</option>
+          <option>Online reading</option>
+        </select>
+      </Field>
+      {!compact && (
+        <div className="md:col-span-2">
+          <Field label="Preferred date & time">
+            <input placeholder="e.g. Saturday morning IST" value={form.preferred_time} onChange={set("preferred_time")} />
+          </Field>
+          <div className="mt-3 rounded-lg border border-border bg-card/60 p-4">
+            <p className="text-sm text-muted-foreground">Prefer to pick a slot yourself? Choose a time on our live calendar.</p>
+            <a
+              href={`https://cal.com/${CAL_LINK}`}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center gap-2 rounded-md border border-primary/50 px-4 py-2 font-display text-xs uppercase tracking-wide text-primary transition hover:bg-primary/10"
+            >
+              <CalendarDays className="size-4" /> Open booking calendar
+            </a>
+          </div>
+        </div>
+      )}
+      <div className="md:col-span-2"><Field label="Your message"><textarea rows={compact ? 3 : 4} placeholder="Share what's on your heart — what guidance are you seeking?" value={form.message} onChange={set("message")} /></Field></div>
+      <Button variant="celestial" className="md:col-span-2" disabled={busy}>
+        {busy ? "Sending…" : sent ? "Send another message" : `Send my ${compact ? "message" : "enquiry"}`}
+      </Button>
     </form>
   );
 }
