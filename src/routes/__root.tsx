@@ -4,11 +4,13 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { SiteFooter, SiteHeader } from "../components/site-chrome";
+import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -114,14 +116,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdmin = pathname.startsWith("/admin");
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="site-shell">
-        <SiteHeader />
+      {isAdmin ? (
         <Outlet />
-        <SiteFooter />
-      </div>
+      ) : (
+        <div className="site-shell">
+          <SiteHeader />
+          <Outlet />
+          <SiteFooter />
+        </div>
+      )}
+      <Toaster />
     </QueryClientProvider>
   );
 }
