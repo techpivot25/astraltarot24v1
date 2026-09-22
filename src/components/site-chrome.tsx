@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, MoonStar, X } from "lucide-react";
+import { CalendarDays, Menu, MoonStar, X } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 
 const links = [
