@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { BarChart3, Eye, FileText, Pencil, Plus, Send, Trash2, CalendarClock } from "lucide-react";
+import { BarChart3, CalendarClock, Eye, FileText, Inbox, Pencil, Plus, Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminShell, SignOutButton, StatCard } from "@/components/admin/admin-chrome";
