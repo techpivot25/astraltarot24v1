@@ -73,6 +73,9 @@ function Dashboard() {
     <AdminShell
       right={
         <>
+          <Button variant="outline" size="sm" onClick={() => navigate({ to: "/admin/enquiries" })}>
+            <Inbox className="size-4" /> Enquiries
+          </Button>
           <Button variant="outline" size="sm" onClick={() => navigate({ to: "/admin/analytics" })}>
             <BarChart3 className="size-4" /> Analytics
           </Button>
