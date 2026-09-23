@@ -16,7 +16,7 @@ export function formatSlot(date: Date, slot: string) {
   return `${format(date, "EEE, d MMM yyyy")} · ${slot} IST`;
 }
 
-export function SlotPicker({ date, slot, onChange }: { date?: Date; slot?: string; onChange: (date: Date | undefined, slot: string | undefined) => void }) {
+export function SlotPicker({ date, slot, onChange }: { date: Date | undefined; slot: string | undefined; onChange: (date: Date | undefined, slot: string | undefined) => void }) {
   const [month, setMonth] = useState<Date>(date ?? new Date());
   const today = useMemo(() => startOfDay(new Date()), []);
   const nowHour = new Date().getHours();
