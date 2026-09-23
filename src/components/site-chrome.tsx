@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { CalendarDays, Menu, MoonStar, X } from "lucide-react";
+import { Menu, MoonStar, X } from "lucide-react";
+import { SlotPicker, formatSlot } from "@/components/slot-picker";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -91,6 +92,8 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", reading_type: "", preferred_time: "", message: "" });
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
+  const [slotDate, setSlotDate] = useState<Date | undefined>();
+  const [slot, setSlot] = useState<string | undefined>();
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
@@ -111,6 +114,8 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
       return;
     }
     setSent(true);
+    setSlotDate(undefined);
+    setSlot(undefined);
     setForm({ name: "", email: "", phone: "", reading_type: "", preferred_time: "", message: "" });
     toast.success("Thank you — your request has been received", { description: "We reply within a few hours during working hours." });
   }
@@ -129,21 +134,20 @@ export function EnquiryForm({ compact = false }: { compact?: boolean }) {
         </select>
       </Field>
       {!compact && (
-        <div className="md:col-span-2">
-          <Field label="Preferred date & time">
-            <input placeholder="e.g. Saturday morning IST" value={form.preferred_time} onChange={set("preferred_time")} />
-          </Field>
-          <div className="mt-3 rounded-lg border border-border bg-card/60 p-4">
-            <p className="text-sm text-muted-foreground">Prefer to pick a slot yourself? Choose a time on our live calendar.</p>
-            <a
-              href={`https://cal.com/${CAL_LINK}`}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex items-center gap-2 rounded-md border border-primary/50 px-4 py-2 font-display text-xs uppercase tracking-wide text-primary transition hover:bg-primary/10"
-            >
-              <CalendarDays className="size-4" /> Open booking calendar
-            </a>
+        <div className="md:col-span-2" id="schedule">
+          <span className="eyebrow text-[0.72rem]">Schedule your slot</span>
+          <div className="mt-2">
+            <SlotPicker
+              date={slotDate}
+              slot={slot}
+              onChange={(d, s) => {
+                setSlotDate(d);
+                setSlot(s);
+                setForm((f) => ({ ...f, preferred_time: d && s ? formatSlot(d, s) : "" }));
+              }}
+            />
           </div>
+          {form.preferred_time && <p className="mt-2 text-sm text-primary">Selected: {form.preferred_time}</p>}
         </div>
       )}
       <div className="md:col-span-2"><Field label="Your message"><textarea rows={compact ? 3 : 4} placeholder="Share what's on your heart — what guidance are you seeking?" value={form.message} onChange={set("message")} /></Field></div>
