@@ -7,7 +7,7 @@ const SLOTS = ["11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM
 
 function slotHour(slot: string) {
   const [t, ap] = slot.split(" ");
-  let h = Number(t.split(":")[0]);
+  let h = Number((t ?? "0").split(":")[0]);
   if (ap === "PM" && h !== 12) h += 12;
   return h;
 }
